@@ -7724,7 +7724,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [288]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">R1</span><span class="o">=</span><span class="n">reviews</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">100</span><span class="p">,:]</span>      <span class="c1"># selecting first 100 rows of the dataset as each restaurant has 100 reviews</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">R1</span><span class="o">=</span><span class="n">reviews</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">100</span><span class="p">,:]</span>    
 <span class="n">R1</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -7845,7 +7845,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [289]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">reviews_combined</span> <span class="o">=</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">R1</span><span class="o">.</span><span class="n">Review</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>   <span class="c1">#joing all reviews to form single string</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">reviews_combined</span> <span class="o">=</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">R1</span><span class="o">.</span><span class="n">Review</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>  
 </pre></div>
 </div>
 </div>
@@ -7876,17 +7876,6 @@ a.anchor-link {
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#making word-cloud</span>
 <span class="n">word_cloud</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span><span class="n">background_color</span><span class="o">=</span><span class="s1">'white'</span><span class="p">,</span><span class="n">max_words</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">46333</span><span class="p">,</span> <span class="n">stopwords</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span>\
 <span class="n">generate_from_text</span><span class="p">(</span><span class="n">reviews_combined</span><span class="p">)</span>
-<span class="c1">#Reproducibility: When you specify a value for random_state, you make the word cloud generation process reproducible. This means that if you use the</span>
-<span class="c1"># same random_state value in the future, you will get the same word cloud image as long as the input data (reviews_combined) and all other parameters remain the same.</span>
-<span class="c1"># This can be useful for ensuring that you can recreate the exact same visualization later or share your work with others who can reproduce the results.</span>
-
-<span class="sd">'''Control over randomness: Certain aspects of the word cloud generation process involve randomness, such as the initial positioning of words and some internal algorithms. </span>
-<span class="sd"> By setting a specific random_state value, you control the seed for the random number generator. This ensures that the random choices made during the word cloud generation are consistent across runs.</span>
-
-<span class="sd">In summary, the random_state parameter is not required for creating a word cloud, but it helps ensure reproducibility and consistency in your visualizations, making it easier to share and compare results.</span>
-<span class="sd"> If you want to recreate the same word cloud in the future, you should use the same random_state value.</span>
-<span class="sd">'''</span>
-<span class="c1"># stop word are some common word that i don't want to include in them</span>
 </pre></div>
 </div>
 </div>
@@ -7962,12 +7951,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [294]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#function for cleaning the text: converting to lowercase, removing punctuations and stemming</span>
-
-<span class="c1">#Lemmatization is a natural language processing (NLP) technique that converts words to their root form, also known as the lemma.</span>
-<span class="c1">#  This is done by removing suffixes and prefixes, and by considering the context of the word. For example,</span>
-<span class="c1">#  the words "running", "ran", and "ran" would all be lemmatized to the word "run".</span>
-<span class="k">def</span> <span class="nf">clean_txt</span><span class="p">(</span><span class="n">sent</span><span class="p">):</span>       
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clean_txt</span><span class="p">(</span><span class="n">sent</span><span class="p">):</span>       
     <span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
     <span class="n">lemmatized</span> <span class="o">=</span> <span class="p">[</span><span class="n">lemm</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="s2">"v"</span><span class="p">)</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">term</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_updated</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">term</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">]</span> 
     <span class="n">res</span> <span class="o">=</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lemmatized</span><span class="p">)</span>
@@ -8082,10 +8066,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [299]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#forming DTM for reviews of each restaurant</span>
-<span class="c1">#A DTM is basically a matrix, with documents designated by rows and words by columns, that the elements are the counts or the weights</span>
-<span class="c1">#  (usually by tf-idf).</span>
-<span class="n">DTM_bigram</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_bigram</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">bigram_count_vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">DTM_bigram</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_bigram</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">bigram_count_vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
 <span class="n">DTM_bigram</span>
 </pre></div>
 </div>
@@ -9284,34 +9265,6 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b716e6ee">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f9706ee6">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=254644af">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -10088,37 +10041,6 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=258f0e1c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [326]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#final_df.to_excel("final data.xlsx")</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6c6db76b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [327]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># p="fish"</span>
-<span class="c1"># p="continental"</span>
-<span class="c1"># if p in myIndex:</span>
-<span class="c1">#     print(p,myIndex[p])</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=71fdff4b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -10313,48 +10235,6 @@ Restaurant:  GD's ;  Expected Cost:  500
 Restaurant:  Tandoori Food Works ;  Expected Cost:  500
 Restaurant:  KFC ;  Expected Cost:  500
 </pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2a56a2d4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=09c548fb">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=59dd63ce">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
 </div>
 </div>
 </div>
